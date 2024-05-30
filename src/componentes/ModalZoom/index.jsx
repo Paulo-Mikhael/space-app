@@ -16,18 +16,18 @@ const DialogEstilizado = styled.dialog`
     border: none;
 `
 
-const ModalZoom = ({ foto }) => {
+const ModalZoom = ({ foto, aoFechar }) => {
     return (
         <>
             {foto && <>
                 <Overlay className="overlay"/>
                 <DialogEstilizado open={!!foto}>
-                    <Imagem foto={foto} selecionada={true} expandida={true}/>
+                    <Imagem foto={foto} expandida={true}/>
                     <form method="dialog">
                         <button 
                             type="submit"
                             onClick={() => {
-                                document.querySelector('.overlay').style.display = 'none';
+                                aoFechar();
                             }}
                         >
                             ok

@@ -59,7 +59,7 @@ const Imagem = ({ foto, aoZoomSolicitado, expandida = false}) => {
                     <img 
                         src="icones/expandir.png"
                         alt="" 
-                        onClick={() => aoZoomSolicitado(foto.id - 1)}
+                        onClick={() => aoZoomSolicitado(foto)}
                     />
                 </IconesContainer>
             </figcaption>

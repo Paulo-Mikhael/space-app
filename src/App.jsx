@@ -5,7 +5,7 @@ import BarraLateral from "./componentes/BarraLateral"
 import Banner from "./componentes/Banner"
 import Galeria from "./componentes/Galeria"
 import fotos from "./fotos.json"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalZoom from "./componentes/ModalZoom"
 
 const FundoGradiente = styled.div`
@@ -32,6 +32,10 @@ const ConteudoGaleria = styled.section`
 const App = () => {
   const [fotosDaGaleria, setFotosDaGaleria] = useState(fotos)
   const [fotoSelecionada, setFotoSelecionada] = useState(null);
+  useEffect(() => {
+    console.log(fotoSelecionada);
+  }, [fotoSelecionada]);
+
   return (
     <FundoGradiente>
       <EstilosGlobais />
@@ -48,7 +52,10 @@ const App = () => {
             </ConteudoGaleria>
           </MainContainer>
       </AppContainer>
-      <ModalZoom foto={fotoSelecionada}/>
+      <ModalZoom 
+        foto={fotoSelecionada}
+        aoFechar={() => {setFotoSelecionada(null)}}
+      />
     </FundoGradiente>
   )
 }

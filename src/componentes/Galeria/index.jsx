@@ -18,9 +18,7 @@ const SecaoFluida = styled.section`
 `
 
 const Galeria = ({ fotos = [], aoFotoSelecionada }) => {
-    const [fotoSelecionada, setFotoSelecionada] = useState(null);
-    aoFotoSelecionada(fotoSelecionada != null ? fotos[fotoSelecionada] : null);
-    return (    
+    return (
         <>
             <Tags/>
             <GaleriaContainer>
@@ -29,9 +27,9 @@ const Galeria = ({ fotos = [], aoFotoSelecionada }) => {
                         Navegue pela galeria
                     </Titulo>
                     <ImagensContainer>
-                        {fotos.map(foto => 
+                        {fotos.map(foto =>
                             <Imagem
-                                aoZoomSolicitado={setFotoSelecionada}
+                                aoZoomSolicitado={aoFotoSelecionada}
                                 foto={foto}
                                 key={foto.id}
                             />
