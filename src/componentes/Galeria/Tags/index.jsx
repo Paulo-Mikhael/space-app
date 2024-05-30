@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import tags from './tags.json';
 
 const H3Estilizado = styled.h3`
     color: white;
@@ -15,8 +14,8 @@ const FlexContainer = styled.div`
     align-items: center;
 `
 const TagEstilizada = styled.button`
-    padding: 10px 8px;
-    border: none;
+    padding: 10px 8px;  
+    border: ${ props => props.$tagId === props.$selecionada ? '3px solid #C98CF1' : 'none' };
     background-color: #d9d9d960;
     color: white;
     border-radius: 10px;
@@ -25,12 +24,23 @@ const TagEstilizada = styled.button`
     cursor: pointer;
 `
 
-const Tags = () => {
+const Tags = ({ tags = [], setTagSelecionada, tagSelecionada }) => {
     return (
         <>
             <FlexContainer>
                 <H3Estilizado>Busque por tags:</H3Estilizado>
-                {tags.map(tag => <TagEstilizada key={tag.id}>{tag.titulo}</TagEstilizada>)}
+                {tags.map(tag => 
+                    <TagEstilizada
+                        key={tag.id}
+                        $tagId={tag.id}
+                        $selecionada={tagSelecionada.id}
+                        onClick={() => {
+                            setTagSelecionada(tag)
+                        }}
+                    >
+                        {tag.titulo}
+                    </TagEstilizada>
+                )}
             </FlexContainer>
         </>
     )
