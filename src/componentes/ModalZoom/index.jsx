@@ -14,24 +14,33 @@ const DialogEstilizado = styled.dialog`
     top: 64px;
     background-color: transparent;
     border: none;
+    position: absolute;
+`
+const BtnFechar = styled.button`
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right: 30px;
 `
 
-const ModalZoom = ({ foto, aoFechar }) => {
+const ModalZoom = ({ foto, aoFechar, aoAlternarFavorito }) => {
     return (
         <>
             {foto && <>
                 <Overlay className="overlay"/>
                 <DialogEstilizado open={!!foto}>
-                    <Imagem foto={foto} expandida={true}/>
+                    <Imagem foto={foto} expandida={true} aoAlternarFavorito={aoAlternarFavorito}/>
                     <form method="dialog">
-                        <button 
+                        <BtnFechar 
                             type="submit"
                             onClick={() => {
                                 aoFechar();
                             }}
                         >
-                            ok
-                        </button>
+                            <img src="icones/fechar.png" alt="" />
+                        </BtnFechar>
                     </form>
                 </DialogEstilizado>
             </>}

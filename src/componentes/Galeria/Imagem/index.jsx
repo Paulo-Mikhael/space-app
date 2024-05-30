@@ -45,8 +45,14 @@ const IconesContainer = styled.div`
         cursor: pointer;
     }
 `
+const IconeExpandir = styled.img`
+    display: ${props => props.$expandida ? 'none' : 'block'};
+`
 
-const Imagem = ({ foto, aoZoomSolicitado, expandida = false}) => {
+const Imagem = ({ foto, aoZoomSolicitado, expandida = false, aoAlternarFavorito }) => {
+
+    const iconeFavorito = foto.favorita ? "icones/favorito-ativo.png" : "icones/favorito.png"
+
     return (
         <ImagemEstilizada $expandida={expandida}>
             <img className="mainImage" src={foto.path} alt={foto.titulo} />
@@ -55,11 +61,18 @@ const Imagem = ({ foto, aoZoomSolicitado, expandida = false}) => {
                     <b>{foto.titulo}</b><br/>{foto.fonte}
                 </h3>
                 <IconesContainer>
-                    <img src="icones/favorito.png" alt="" />
-                    <img 
+                    <img src={iconeFavorito} alt="" onClick={
+                        () => {
+                            aoAlternarFavorito(foto)
+                        }
+                    }/>
+                    <IconeExpandir 
                         src="icones/expandir.png"
                         alt="" 
-                        onClick={() => aoZoomSolicitado(foto)}
+                        onClick={() => {
+                            aoZoomSolicitado(foto)
+                        }}
+                        $expandida={expandida}
                     />
                 </IconesContainer>
             </figcaption>
