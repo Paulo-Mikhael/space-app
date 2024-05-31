@@ -35,16 +35,41 @@ const App = () => {
   const [fotoSelecionada, setFotoSelecionada] = useState(null);
   const [tagsDaGaleria, setTagsDaGaleria] = useState(tags);
   const [tagSelecionada, setTagSelecionada] = useState(tags[0]);
+  const [pesquisa, setPesquisa] = useState('');
+
+  let fotosFiltradas = fotos;
 
   useEffect(() => {
-    const fotosFiltradas = fotos.filter(foto => foto.tagId === tagSelecionada.id);
+    fotosFiltradas = fotos.filter(foto => foto.tagId === tagSelecionada.id);
+
+    if (pesquisa !== ''){
+      filtrarTexto();
+    }
     
-    if (tagSelecionada !== tags[0]){
+    if (tagSelecionada !== tags[0] || pesquisa !== ''){
       setFotosDaGaleria(fotosFiltradas);
     }else{
       setFotosDaGaleria(fotos);
     }
   }, [tagSelecionada]);
+
+  useEffect(() => {
+    filtrarTexto();
+  }, [pesquisa]);
+
+  function filtrarTexto(){
+    fotosFiltradas = fotos.filter(foto => foto.tagId === tagSelecionada.id);
+
+    if (tagSelecionada === tags[0]){
+      fotosFiltradas = fotos.filter(foto => foto.titulo.toLowerCase().includes(pesquisa.toLowerCase()));
+    }else{
+      fotosFiltradas = fotosFiltradas.filter(foto => foto.titulo.toLowerCase().includes(pesquisa.toLowerCase()));
+    }
+
+    setFotosDaGaleria(fotosFiltradas);
+  }
+
+  let favoritos = [];
 
   const aoAlternarFavorito = (foto) => {
     if (foto.id === fotoSelecionada?.id){
@@ -58,14 +83,18 @@ const App = () => {
         ...fotoDaGaleria,
         favorita: fotoDaGaleria.id === foto.id ? !fotoDaGaleria.favorita : fotoDaGaleria.favorita
       }
-    }));  
+    }));
+  }
+
+  function mudaValor(event){
+    setPesquisa(event.target.value);
   }
 
   return (
     <FundoGradiente>
       <EstilosGlobais />
       <AppContainer>
-        <Cabecalho />
+        <Cabecalho pesquisa={pesquisa} mudaValor={mudaValor}/>
           <MainContainer>
             <BarraLateral />
             <ConteudoGaleria>

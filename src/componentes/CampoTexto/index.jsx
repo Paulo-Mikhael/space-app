@@ -26,10 +26,10 @@ const InputEstilizado = styled.div`
     }
 `
 
-const CampoTexto = () => {
+const CampoTexto = ({ pesquisa, mudaValor }) => {
     return (
         <InputEstilizado>
-            <input type="text" placeholder="O que você procura?" />
+            <input id="campo-texto" type="text" placeholder="O que você procura?" value={pesquisa} onChange={mudaValor}/>
             <img src="icones/search.png" alt="" />
         </InputEstilizado>
     )

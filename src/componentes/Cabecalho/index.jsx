@@ -11,11 +11,11 @@ const HeaderEstilizado = styled.header`
     }
 `
 
-const Cabecalho = () => {
+const Cabecalho = ({ pesquisa, mudaValor }) => {
     return (
         <HeaderEstilizado>
             <img src="imagens/logo.png" alt="logo da emmpresa" />
-            <CampoTexto />
+            <CampoTexto pesquisa={pesquisa} mudaValor={mudaValor}/>
         </HeaderEstilizado>
     )
 }
